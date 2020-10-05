@@ -1,4 +1,4 @@
-# EGA submission docker in a :nut: :console:
+# EGA submission docker in a :chestnut: :shell:
 
 By using EGA cryptor and Aspera Connect:
 
