@@ -1,13 +1,13 @@
 # EGA submission docker in a :chestnut: :shell:
 
-By using EGA cryptor and Aspera Connect:
+By using [EGA cryptor][ega-cryptor] and Aspera Connect:
 
 ```shell
 docker run -v $PWD:/mnt amazoncorretto:8u262-alpine-jre java -jar /mnt/ega-cryptor-2.0.0.jar -i /mnt/test -o /mnt/test
 docker run --rm  -it ibmcom/aspera-cli ascp
 ```
 
-The arguments for the aspera cli are passed as env vars on the official container :facepalm::
+The arguments for the aspera cli are [passed as env vars on the official container docs][ibmcom/aspera-cli] :facepalm::
 
 ```shell
 docker run --rm \
