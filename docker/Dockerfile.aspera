@@ -1,0 +1,9 @@
+FROM ubuntu:latest 
+
+RUN useradd -ms /bin/bash aspera && gpasswd -a aspera aspera && mkdir -p /opt/aspera && chown aspera:aspera /opt/aspera
+COPY /vendor/*.tar.gz /home/aspera
+WORKDIR /home/aspera
+USER aspera
+RUN tar xvfz *.tar.gz && rm *.tar.gz && bash ./ibm-aspera-connect-3.11.0.5-linux-g2.12-64.sh && rm *.sh
+
+ENTRYPOINT ["/home/aspera/.aspera/connect/bin/ascp"]

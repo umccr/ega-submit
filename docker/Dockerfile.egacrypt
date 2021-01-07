@@ -1,0 +1,6 @@
+FROM amazoncorretto:8u262-alpine-jre
+
+COPY /vendor/ega-cryptor-2.0.0.jar /opt/ega-cryptor-2.0.0.jar 
+COPY /bin/ega-cryptor.sh /opt/bin/ega-cryptor.sh
+
+ENTRYPOINT ["/opt/bin/ega-cryptor.sh"]
