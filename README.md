@@ -8,6 +8,8 @@ Get it done on the spot with an AWS instance (a.k.a: to be automated with AWS Ba
 $ sudo yum install docker && gpasswd -a ec2-user docker # Note: Only needed if your AWS instance doesn't have docker yet (docker ps -a works?)
 							# Note2: Logout and login for the docker group add to be successful
 $ git clone https://github.com/umccr/ega-submit && cd ega-submit
+$ docker build . -f docker/Dockerfile.aspera -t aspera
+$ docker build . -f docker/Dockerfile.egacrypt -t egacrypt
 $ vim ega-files.txt <--- the input file list
 $ export EGA_BOX=ega-box-1578
 $ export EGA_PASSWORD=<PASSWORD_HERE>
