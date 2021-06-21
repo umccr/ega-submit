@@ -6,15 +6,20 @@ Get it done on the spot with an AWS instance (a.k.a: to be automated with AWS Ba
 
 ```
 $ sudo yum install docker && gpasswd -a ec2-user docker # Note: Only needed if your AWS instance doesn't have docker yet (docker ps -a works?)
-							# Note2: Logout and login for the docker group add to be successful
+                                                        # Note2: Logout and login for the docker group add to be successful
 $ git clone https://github.com/umccr/ega-submit && cd ega-submit
 $ docker build . -f docker/Dockerfile.aspera -t aspera
 $ docker build . -f docker/Dockerfile.egacrypt -t egacrypt
-$ vim ega-files.txt <--- the input file list
+$ vim ega-files.txt <--- the input file list, consisting of a full s3:// url to the object, one per line
 $ export EGA_BOX=ega-box-1578
 $ export EGA_PASSWORD=<PASSWORD_HERE>
 $ ./bin/serial_ega_upload.sh
 ```
+
+The serial script will (very slowly and screaming to be parallelized) download each file in `ega-files` from S3, encrypt and upload to the `EGA_BOX`.
+
+Please note that the serial script downloads, encrypts and **deletes** files. This is by design, so that a small AWS SPOT box with almost no disk space
+can be used on the span of days, without risk of saturating the (majorly unknown) ingress limit specifications for EGA, therefore avoiding timeouts.
 
 # Building
 
