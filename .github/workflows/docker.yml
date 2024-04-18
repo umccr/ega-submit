@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: deploy/Dockerfile.aspera
+          file: docker/Dockerfile.aspera
           push: true
           tags: |
             ghcr.io/umccr/aspera:latest
@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: deploy/Dockerfile.egacrypt
+          file: docker/Dockerfile.egacrypt
           push: true
           tags: |
             ghcr.io/umccr/egacrypt:latest
