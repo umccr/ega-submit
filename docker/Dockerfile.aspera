@@ -1,9 +1,11 @@
-FROM ubuntu:latest 
+FROM debian:stable-slim
 
 RUN useradd -ms /bin/bash aspera && gpasswd -a aspera aspera && mkdir -p /opt/aspera && chown aspera:aspera /opt/aspera
-COPY /vendor/*.tar.gz /home/aspera
-WORKDIR /home/aspera
+#COPY --from=busybox:1.35-uclibc /bin/sh /bin/sh
+RUN mkdir -p /opt/aspera && chown aspera:aspera /opt/aspera
+COPY /vendor/*.tar.gz /opt/aspera
+WORKDIR /opt/aspera
 USER aspera
-RUN tar xvfz *.tar.gz && rm *.tar.gz && bash ./ibm-aspera-connect-3.11.0.5-linux-g2.12-64.sh && rm *.sh
+RUN tar xvfz *.tar.gz && chmod +x *.sh && ./ibm-aspera-connect_4.2.8.540_linux_x86_64.sh && rm *.sh *.tar.gz
 
 ENTRYPOINT ["/home/aspera/.aspera/connect/bin/ascp"]
