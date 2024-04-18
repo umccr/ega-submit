@@ -6,6 +6,9 @@ RUN mkdir -p /opt/aspera && chown aspera:aspera /opt/aspera
 COPY /vendor/*.tar.gz /opt/aspera
 WORKDIR /opt/aspera
 USER aspera
+# FIXME: Probably shouldn't vendor those +50MB of tarball in GitHub and download from:
+# https://d3gcli72yxqn2z.cloudfront.net/downloads/connect/latest/bin/ibm-aspera-connect_4.2.8.540_linux_x86_64.tar.gz
+# In 2024 IBM seems to have reconsidered and they do not require customers have to fill a form to download it.
 RUN tar xvfz *.tar.gz && chmod +x *.sh && ./ibm-aspera-connect_4.2.8.540_linux_x86_64.sh && rm *.sh *.tar.gz
 
 ENTRYPOINT ["/home/aspera/.aspera/connect/bin/ascp"]
