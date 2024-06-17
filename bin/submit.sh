@@ -14,4 +14,4 @@ PASSWORD=$3
 docker run -v $PWD/data:/data ghcr.io/umccr/egacrypt -f -i /data/$SAMPLE_NAME -o /data/enc/$SAMPLE_NAME
 
 # Submit
-docker run -v $PWD/data/enc:/data --env ASPERA_SCP_PASS=$PASSWORD ghcr.io/umccr/aspera -P33001 -O33001 -QT -L- /data/$SAMPLE_NAME $USERNAME@$HOSTNAME:/.
+docker run -v $PWD/data/enc:/data --env ASPERA_SCP_PASS=$PASSWORD ghcr.io/umccr/aspera -k1 -P33001 -O33001 -QT -L- /data/$SAMPLE_NAME $USERNAME@$HOSTNAME:/.
