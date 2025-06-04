@@ -19,6 +19,9 @@ The serial script will (very slowly and screaming to be parallelized) download e
 Please note that the serial script downloads, encrypts and **deletes** files. This is by design, so that a small AWS SPOT box with almost no disk space
 can be used on the span of days, without risk of saturating the (majorly unknown) ingress limit specifications for EGA, therefore avoiding timeouts.
 
+Also, EGA cryptor's threading granularity is at a file level, meaning that a file cannot be encrypted by many threads at once. Instead, only one thread 
+per file can be used to encrypt.
+
 # Running
 
 By using [EGA cryptor][ega-cryptor] and Aspera Connect:
