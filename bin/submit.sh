@@ -22,7 +22,10 @@ else
 # Assumes the following alias in .bash_profile:
 # alias ega-cryptor='java -jar .local/ega-cryptor-2.0.0.jar'
 #
-        ./bin/ega-cryptor.sh -t$(nproc) -i ${PREFIX}${SAMPLE} -o ${PREFIX}/data/enc/$SAMPLE_NAME
-#	aspera -k1 -P33001 -O33001 -QT -L- ${PREFIX}$SAMPLE_NAME $USERNAME@$HOSTNAME:/.
+        ./bin/ega-cryptor.sh -t$(nproc) -i ${PREFIX}${SAMPLE} -o ${PREFIX}/data/enc
+        ./bin/ega-cryptor.sh -t$(nproc) -i ${PREFIX}${SAMPLE}.bai -o ${PREFIX}/data/enc
+        aspera -k1 -P33001 -O33001 -QT -L- ${PREFIX}/data/enc/${SAMPLE_NAME}.gpg $USERNAME@$HOSTNAME:/.
+        aspera -k1 -P33001 -O33001 -QT -L- ${PREFIX}/data/enc/${SAMPLE_NAME}.md5 $USERNAME@$HOSTNAME:/.
+        aspera -k1 -P33001 -O33001 -QT -L- ${PREFIX}/data/enc/${SAMPLE_NAME}.bai.gpg $USERNAME@$HOSTNAME:/.
+        aspera -k1 -P33001 -O33001 -QT -L- ${PREFIX}/data/enc/${SAMPLE_NAME}.bai.md5 $USERNAME@$HOSTNAME:/.
 fi
-
